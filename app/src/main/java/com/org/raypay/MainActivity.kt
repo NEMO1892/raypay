@@ -9,7 +9,9 @@ import androidx.navigation.compose.rememberNavController
 import com.org.design_system.theme.RaypayTheme
 import com.org.raypay.navigation.AppNavGraph
 import com.org.raypay.navigation.RayPayNavigatorImpl
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
