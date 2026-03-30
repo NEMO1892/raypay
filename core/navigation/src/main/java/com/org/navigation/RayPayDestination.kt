@@ -6,5 +6,7 @@ sealed class RayPayDestination(val route: String) {
 
     object LogIn : RayPayDestination("LogIn")
 
-    object Credentials : RayPayDestination("Credentials")
+    object SignIn : RayPayDestination("SignIn")
+
+    object ForgotPassword : RayPayDestination("ForgotPassword")
 }

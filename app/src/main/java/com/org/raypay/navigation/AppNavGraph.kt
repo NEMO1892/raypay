@@ -8,6 +8,7 @@ import com.org.login.LoginScreen
 import com.org.navigation.RayPayDestination
 import com.org.navigation.RayPayNavigator
 import com.org.onboarding.ui.WelcomeScreen
+import com.org.sign_in.ui.SignInScreen
 
 @Composable
 internal fun AppNavGraph(
@@ -26,8 +27,12 @@ internal fun AppNavGraph(
             LoginScreen(rayPayNavigator = rayPayNavigator)
         }
 
-        composable(RayPayDestination.Credentials.route) {
-            // TODO: add navigation to Credentials screen
+        composable(RayPayDestination.SignIn.route) {
+            SignInScreen(rayPayNavigator = rayPayNavigator)
+        }
+
+        composable(RayPayDestination.ForgotPassword.route) {
+            // TODO: add navigation to ForgotPassword screen
         }
     }
 }
