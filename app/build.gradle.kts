@@ -28,6 +28,10 @@ dependencies {
     implementation(projects.domain.auth)
 
     implementation(projects.features.auth)
+    implementation(projects.features.onboarding)
+
+    implementation(projects.core.designSystem)
+    implementation(projects.core.navigation)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
