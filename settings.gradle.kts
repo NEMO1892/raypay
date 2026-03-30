@@ -36,4 +36,7 @@ include(":data:auth")
 include(":domain:auth")
 
 include(":features:auth")
+include(":features:onboarding")
 
+include(":core:navigation")
+include(":core:design-system")
