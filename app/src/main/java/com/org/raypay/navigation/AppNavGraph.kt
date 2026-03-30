@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.org.login.LoginScreen
 import com.org.navigation.RayPayDestination
 import com.org.navigation.RayPayNavigator
 import com.org.onboarding.ui.WelcomeScreen
@@ -22,7 +23,11 @@ internal fun AppNavGraph(
         }
 
         composable(RayPayDestination.LogIn.route) {
-            // TODO: set LogIn screen
+            LoginScreen(rayPayNavigator = rayPayNavigator)
+        }
+
+        composable(RayPayDestination.Credentials.route) {
+            // TODO: add navigation to Credentials screen
         }
     }
 }

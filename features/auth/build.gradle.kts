@@ -1,13 +1,16 @@
 plugins {
-    id("java-library")
-    alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.raypay.android.library)
+    alias(libs.plugins.raypay.android.library.compose)
+    alias(libs.plugins.raypay.hilt)
 }
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+
+android {
+    namespace = "com.org.features.auth"
 }
-kotlin {
-    compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
-    }
+
+dependencies {
+    implementation(projects.domain.auth)
+
+    implementation(projects.core.navigation)
+    implementation(projects.core.designSystem)
 }
