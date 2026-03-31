@@ -8,5 +8,9 @@ interface RayPayNavigator {
 
     fun navigateToSignIn()
 
+    fun navigateToSignUp()
+
     fun navigateToForgotPassword()
+
+    fun navigateToHome()
 }

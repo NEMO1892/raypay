@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.org.design_system.spacer.VerticalSpacer
+import com.org.design_system.theme.PoppinsFontFamily
 import com.org.design_system.theme.RaypayTheme
 import com.org.core.design_system.R as DesignSystemR
 
@@ -38,6 +39,7 @@ internal fun RaypayLogo(
         Text(
             text = "raypay",
             style = TextStyle(
+                fontFamily = PoppinsFontFamily,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 33.sp,
                 color = Color.White

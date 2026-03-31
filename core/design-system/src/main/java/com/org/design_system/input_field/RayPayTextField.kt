@@ -48,7 +48,7 @@ fun RayPayTextField(
         fontSize = 14.sp,
         lineHeight = 16.sp,
     ),
-    shape: Shape = RoundedCornerShape(12.dp),
+    shape: Shape = RoundedCornerShape(20.dp),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     isError: Boolean = false,

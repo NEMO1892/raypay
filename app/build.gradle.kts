@@ -29,6 +29,7 @@ dependencies {
 
     implementation(projects.features.auth)
     implementation(projects.features.onboarding)
+    implementation(projects.features.home)
 
     implementation(projects.core.designSystem)
     implementation(projects.core.navigation)

@@ -11,5 +11,4 @@ android {
 dependencies {
     implementation(projects.core.navigation)
     implementation(projects.core.designSystem)
-//    implementation(projects.core.ui)
 }

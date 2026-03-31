@@ -93,9 +93,7 @@ class SignInViewModel @Inject constructor(
                                 )
                             }
 
-                            // TODO: add navigation to next screen
-
-                            println("Success")
+                            _effects.trySend(SignInEffect.NavigateToHome)
                         }
                         .onFailure { throwable ->
                             val authError = throwable as? DomainAuthError

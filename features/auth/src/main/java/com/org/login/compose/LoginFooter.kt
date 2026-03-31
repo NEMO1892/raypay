@@ -20,8 +20,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.org.design_system.spacer.VerticalSpacer
+import com.org.design_system.theme.PoppinsFontFamily
 import com.org.design_system.theme.RaypayTheme
 
 @Composable
@@ -36,12 +38,13 @@ internal fun LoginFooter(
     ) {
         Text(
             text = "Welcome to \"Raypay\"\nfinance mobile app",
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Start,
             style = TextStyle(
+                fontFamily = PoppinsFontFamily,
                 fontWeight = FontWeight.Normal,
                 fontSize = 25.sp,
                 lineHeight = 32.sp,
-                letterSpacing = 0.sp,
+                letterSpacing = 0.em,
                 color = Color.White
             ),
             modifier = Modifier.fillMaxWidth()
@@ -62,10 +65,11 @@ internal fun LoginFooter(
             Text(
                 text = "Log in",
                 style = TextStyle(
+                    fontFamily = PoppinsFontFamily,
                     fontWeight = FontWeight.Normal,
                     fontSize = 16.sp,
                     lineHeight = 22.sp,
-                    letterSpacing = 0.sp,
+                    letterSpacing = 0.em,
                     color = Color.White
                 )
             )
@@ -94,10 +98,11 @@ internal fun LoginFooter(
             },
             textAlign = TextAlign.Center,
             style = TextStyle(
+                fontFamily = PoppinsFontFamily,
                 fontWeight = FontWeight.Normal,
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 lineHeight = 18.sp,
-                letterSpacing = 0.sp
+                letterSpacing = 0.em
             ),
             modifier = Modifier
                 .fillMaxWidth()

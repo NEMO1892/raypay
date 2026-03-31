@@ -8,5 +8,9 @@ sealed class RayPayDestination(val route: String) {
 
     object SignIn : RayPayDestination("SignIn")
 
+    object SignUp : RayPayDestination("SignUp")
+
     object ForgotPassword : RayPayDestination("ForgotPassword")
+
+    object Home : RayPayDestination("Home")
 }

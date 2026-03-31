@@ -13,6 +13,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.org.design_system.theme.PoppinsFontFamily
 import com.org.sign_in.ui.mvi.SignInEvent
 import com.org.sign_in.ui.mvi.SignInState
 
@@ -45,8 +46,9 @@ internal fun SignInContinueButton(
         Text(
             text = "Continue",
             style = TextStyle(
+                fontFamily = PoppinsFontFamily,
                 fontWeight = FontWeight.Normal,
-                fontSize = 14.sp,
+                fontSize = 16.sp,
                 lineHeight = 22.sp,
                 letterSpacing = 0.sp,
                 color = Color.Black
