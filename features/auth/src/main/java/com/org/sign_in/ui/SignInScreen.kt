@@ -3,19 +3,24 @@ package com.org.sign_in.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,6 +57,7 @@ fun SignInScreen(
             when (effect) {
                 SignInEffect.NavigateBack -> rayPayNavigator.navigateBack()
                 SignInEffect.NavigateToForgotPassword -> rayPayNavigator.navigateToForgotPassword()
+                SignInEffect.NavigateToHome -> rayPayNavigator.navigateToHome()
             }
         }
     }
@@ -75,8 +81,10 @@ private fun SignInScreenContent(
 
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
+    val density = LocalDensity.current
+    val isKeyboardVisible = WindowInsets.ime.getBottom(density) > 0
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize().imePadding()) {
         Image(
             painter = painterResource(id = R.drawable.ic_login_background),
             contentDescription = null,
@@ -85,28 +93,32 @@ private fun SignInScreenContent(
         )
 
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .systemBarsPadding()
-                .padding(start = 38.dp, end = 38.dp, top = 60.dp, bottom = 100.dp)
+                .padding(start = 38.dp, end = 38.dp, top = 60.dp, bottom = if (isKeyboardVisible) 0.dp else 100.dp)
         ) {
-            SignInHeader()
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                SignInHeader()
 
-            VerticalSpacer(60.dp)
+                VerticalSpacer(60.dp)
 
-            SignInInputFields(
-                state = state,
-                userEvent = userEvent,
-                focusManager = focusManager,
-                focusRequester = focusRequester
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
+                SignInInputFields(
+                    state = state,
+                    userEvent = userEvent,
+                    focusManager = focusManager,
+                    focusRequester = focusRequester
+                )
+            }
 
             SignInContinueButton(
                 state = state,
-                userEvent = userEvent
+                userEvent = userEvent,
+                modifier = Modifier.padding(top = 24.dp)
             )
         }
 

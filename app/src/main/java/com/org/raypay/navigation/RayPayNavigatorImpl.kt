@@ -20,7 +20,15 @@ class RayPayNavigatorImpl(
         navController.navigate(RayPayDestination.SignIn.route)
     }
 
+    override fun navigateToSignUp() {
+        navController.navigate(RayPayDestination.SignUp.route)
+    }
+
     override fun navigateToForgotPassword() {
         navController.navigate(RayPayDestination.ForgotPassword.route)
+    }
+
+    override fun navigateToHome() {
+        navController.navigate(RayPayDestination.Home.route)
     }
 }

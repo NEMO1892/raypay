@@ -26,7 +26,7 @@ fun LoginScreen(
 ) {
     LoginScreenContent(
         onLogInClicked = { rayPayNavigator.navigateToSignIn() },
-        onSignUpClicked = { rayPayNavigator.navigateBack() }
+        onSignUpClicked = { rayPayNavigator.navigateToSignUp() }
     )
 }
 

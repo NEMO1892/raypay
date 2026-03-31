@@ -40,7 +40,6 @@ internal fun SignInInputFields(
 
     Column(modifier = modifier) {
         AuthInputFiled(
-            title = "Login",
             placeHolderRes = "Enter your login",
             value = state.login,
             isFieldInError = state.isErrorLogin(),
@@ -51,10 +50,9 @@ internal fun SignInInputFields(
             modifier = Modifier.fillMaxWidth()
         )
 
-        VerticalSpacer(15.dp)
+        VerticalSpacer(8.dp)
 
         AuthInputFiled(
-            title = "Password",
             placeHolderRes = "Enter your password",
             value = state.password,
             isFieldInError = state.isErrorPassword(),
@@ -76,8 +74,6 @@ internal fun SignInInputFields(
             },
             modifier = Modifier.fillMaxWidth()
         )
-
-        VerticalSpacer(20.dp)
 
         Text(
             text = "Forgot password?",

@@ -38,7 +38,6 @@ fun AuthInputFiled(
     onValueChanged: (String) -> Unit,
     focusManager: FocusManager,
     focusRequester: FocusRequester,
-    title: String? = null,
     placeHolderRes: String? = null,
     isFieldInError: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -58,15 +57,6 @@ fun AuthInputFiled(
     modifier: Modifier = Modifier,
 ) {
     Column {
-        title?.let {
-            Text(
-                text = title,
-                fontSize = 16.sp,
-                color = Color(0xFFA2A2A2),
-            )
-            VerticalSpacer(8.dp)
-        }
-
         RayPayTextField(
             modifier = modifier
                 .fillMaxWidth()

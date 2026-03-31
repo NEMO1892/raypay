@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.org.features.onboarding"
+    namespace = "com.org.features.home"
 }
 
 dependencies {
