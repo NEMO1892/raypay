@@ -40,3 +40,5 @@ include(":features:onboarding")
 
 include(":core:navigation")
 include(":core:design-system")
+include(":core:firebase")
+include(":core:common")

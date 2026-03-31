@@ -4,11 +4,9 @@ plugins {
 }
 
 android {
-    namespace = "com.org.data.auth"
+    namespace = "com.org.core.common"
 }
 
 dependencies {
-    implementation(projects.core.firebase)
-
-    implementation(projects.domain.auth)
+    implementation(projects.core.designSystem)
 }
