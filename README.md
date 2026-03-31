@@ -1,6 +1,6 @@
 # RayPay — Finance Mobile App
 
-A test Android application built as a portfolio project for a job vacancy. RayPay is a finance/payment app showcasing modern Android development practices including Clean Architecture, MVI, Jetpack Compose, Firebase Authentication, and a multi-module project structure.
+A test Android application built as a portfolio project. RayPay is a finance/payment app showcasing modern Android development practices including Clean Architecture, MVI, Jetpack Compose, Firebase Authentication, and a multi-module project structure.
 
 ---
 
