@@ -9,8 +9,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.domain.auth)
+    api(projects.domain.auth)
 
     implementation(projects.core.navigation)
     implementation(projects.core.designSystem)
+    implementation(projects.core.common)
 }

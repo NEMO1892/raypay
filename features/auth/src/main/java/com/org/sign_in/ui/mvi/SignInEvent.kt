@@ -13,4 +13,6 @@ sealed interface SignInEvent {
     data class OnContinueClicked(val login: String, val password: String): SignInEvent
 
     data object OnForgotPasswordClicked : SignInEvent
+
+    data object OnDismissSignInError : SignInEvent
 }

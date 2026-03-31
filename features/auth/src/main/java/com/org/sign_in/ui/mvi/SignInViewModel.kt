@@ -2,6 +2,13 @@ package com.org.sign_in.ui.mvi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.org.auth.model.DomainAuthError
+import com.org.auth.use_case.SignInUseCase
+import com.org.common.validation.AuthValidator
+import com.org.common.validation.ValidationResult
+import com.org.common.validation.emailMessage
+import com.org.common.validation.passwordMessage
+import com.org.sign_in.utils.updateForAuthError
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,11 +16,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-
+    private val authValidator: AuthValidator,
+    private val signInUseCase: SignInUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(SignInState())
@@ -30,6 +39,7 @@ class SignInViewModel @Inject constructor(
             is SignInEvent.OnPasswordEyeIconClicked -> handleOnPasswordEyeIconClicked(event.isPasswordVisible)
             is SignInEvent.OnContinueClicked -> handleOnContinueClicked(event.login, event.password)
             is SignInEvent.OnForgotPasswordClicked -> handleOnForgotPasswordClicked()
+            is SignInEvent.OnDismissSignInError -> _state.update { it.copy(signInPopupErrorText = null) }
         }
     }
 
@@ -66,7 +76,47 @@ class SignInViewModel @Inject constructor(
     }
 
     private fun handleOnContinueClicked(login: String, password: String) {
-        // TODO: add validation logic and sending request
+        when (val validationResult = authValidator.validateEmailAndPassword(login, password)) {
+            ValidationResult.Success -> {
+                viewModelScope.launch {
+                    _state.update {
+                        it.copy(isLoading = true, isSignInButtonEnabled = false)
+                    }
+                    signInUseCase(login, password)
+                        .onSuccess {
+                            _state.update {
+                                it.copy(
+                                    isSignInButtonEnabled = true,
+                                    supportTextLogin = null,
+                                    supportTextPassword = null,
+                                    isLoading = false
+                                )
+                            }
+
+                            // TODO: add navigation to next screen
+
+                            println("Success")
+                        }
+                        .onFailure { throwable ->
+                            val authError = throwable as? DomainAuthError
+                            _state.update {
+                                it.updateForAuthError(authError)
+                            }
+                        }
+                }
+            }
+
+            is ValidationResult.Error -> {
+                _state.update { signInState ->
+                    signInState.copy(
+                        isLoading = false,
+                        supportTextLogin = validationResult.errors.emailMessage(),
+                        supportTextPassword = validationResult.errors.passwordMessage(),
+                        isSignInButtonEnabled = signInState.isErrorLogin() || signInState.isErrorPassword()
+                    )
+                }
+            }
+        }
     }
 
     private fun handleOnForgotPasswordClicked() {

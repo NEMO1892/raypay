@@ -1,55 +1,44 @@
 package com.org.sign_in.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.org.design_system.input_field.AuthInputFiled
+import com.org.design_system.loading.LoadingScreen
 import com.org.design_system.spacer.VerticalSpacer
 import com.org.design_system.theme.RaypayTheme
 import com.org.features.auth.R
 import com.org.navigation.RayPayNavigator
+import com.org.sign_in.ui.compose.ErrorPopUp
+import com.org.sign_in.ui.compose.SignInContinueButton
 import com.org.sign_in.ui.compose.SignInHeader
+import com.org.sign_in.ui.compose.SignInInputFields
 import com.org.sign_in.ui.mvi.SignInEffect
 import com.org.sign_in.ui.mvi.SignInEvent
 import com.org.sign_in.ui.mvi.SignInState
 import com.org.sign_in.ui.mvi.SignInViewModel
-import com.org.sign_in.ui.mvi.isErrorLogin
-import com.org.sign_in.ui.mvi.isErrorPassword
-import com.org.core.design_system.R as DesignSystemR
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.org.sign_in.ui.mvi.isShowSignInError
+import kotlinx.coroutines.delay
+
+private const val ERROR_POP_UP_DELAY = 3_000L
 
 @Composable
 fun SignInScreen(
@@ -79,10 +68,13 @@ private fun SignInScreenContent(
     userEvent: (SignInEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    if (state.isLoading) {
+        LoadingScreen(modifier = Modifier.fillMaxSize())
+        return
+    }
+
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
-    val eyeIcon =
-        if (state.isPasswordVisible) DesignSystemR.drawable.ic_eye_on else DesignSystemR.drawable.ic_eye_off
 
     Box(modifier = modifier.fillMaxSize()) {
         Image(
@@ -103,93 +95,35 @@ private fun SignInScreenContent(
 
             VerticalSpacer(60.dp)
 
-            AuthInputFiled(
-                title = "Login",
-                placeHolderRes = "Enter your login",
-                value = state.login,
-                isFieldInError = state.isErrorLogin(),
-                supportText = state.supportTextLogin,
-                onValueChanged = { userEvent(SignInEvent.OnLoginValueChanged(it)) },
+            SignInInputFields(
+                state = state,
+                userEvent = userEvent,
                 focusManager = focusManager,
-                focusRequester = focusRequester,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            VerticalSpacer(15.dp)
-
-            AuthInputFiled(
-                title = "Password",
-                placeHolderRes = "Enter your password",
-                value = state.password,
-                isFieldInError = state.isErrorPassword(),
-                supportText = state.supportTextPassword,
-                onValueChanged = { userEvent(SignInEvent.OnPasswordValueChanged(it)) },
-                focusManager = focusManager,
-                focusRequester = focusRequester,
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                visualTransformation = if (state.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                trailingIcon = {
-                    Icon(
-                        painter = painterResource(id = eyeIcon),
-                        contentDescription = null,
-                        tint = Color(0xFFA2A2A2),
-                        modifier = Modifier.clickable {
-                            userEvent(SignInEvent.OnPasswordEyeIconClicked(state.isPasswordVisible))
-                        },
-                    )
-                },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            VerticalSpacer(20.dp)
-
-            Text(
-                text = "Forgot password?",
-                style = TextStyle(
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 12.sp,
-                    lineHeight = 18.sp,
-                    letterSpacing = 0.sp,
-                    color = Color(0xFFBABABA)
-                ),
-                modifier = Modifier
-                    .align(Alignment.Start)
-                    .clickable { userEvent(SignInEvent.OnForgotPasswordClicked) }
+                focusRequester = focusRequester
             )
 
             Spacer(modifier = Modifier.weight(1f))
 
-            Button(
-                onClick = {
-                    userEvent(
-                        SignInEvent.OnContinueClicked(
-                            login = state.login,
-                            password = state.password
-                        )
-                    )
-                },
-                enabled = state.isSignInButtonEnabled,
-                shape = RoundedCornerShape(20.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = Color.White,
-                    disabledContainerColor = Color.White.copy(alpha = 0.4f),
-                    disabledContentColor = Color.White.copy(alpha = 0.4f)
-                ),
-                contentPadding = PaddingValues(vertical = 22.dp, horizontal = 15.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "Continue",
-                    style = TextStyle(
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 14.sp,
-                        lineHeight = 22.sp,
-                        letterSpacing = 0.sp,
-                        color = Color.Black
-                    )
-                )
+            SignInContinueButton(
+                state = state,
+                userEvent = userEvent
+            )
+        }
+
+        if (state.isShowSignInError()) {
+            LaunchedEffect(state.signInPopupErrorText) {
+                delay(ERROR_POP_UP_DELAY)
+                userEvent(SignInEvent.OnDismissSignInError)
             }
+
+            ErrorPopUp(
+                message = state.signInPopupErrorText ?: "Unknown Error, please try later.",
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .fillMaxWidth()
+                    .systemBarsPadding()
+                    .padding(top = 30.dp, start = 24.dp, end = 24.dp)
+            )
         }
     }
 }

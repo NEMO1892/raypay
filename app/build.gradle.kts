@@ -32,6 +32,8 @@ dependencies {
 
     implementation(projects.core.designSystem)
     implementation(projects.core.navigation)
+    implementation(projects.core.firebase)
+    implementation(projects.core.common)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
