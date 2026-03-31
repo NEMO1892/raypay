@@ -86,7 +86,7 @@ private fun SignInScreenContent(
 
     Box(modifier = modifier.fillMaxSize().imePadding()) {
         Image(
-            painter = painterResource(id = R.drawable.ic_login_background),
+            painter = painterResource(id = R.drawable.ic_sign_in_background),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
