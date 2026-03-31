@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "748522786497",
+    "project_id": "raypay-acceb",
+    "storage_bucket": "raypay-acceb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748522786497:android:cf20a3a3f958bee21c8e40",
+        "android_client_info": {
+          "package_name": "com.org.raypay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUxOJ72exfB1NqwLJHg-wHCj5Pm95FOA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
