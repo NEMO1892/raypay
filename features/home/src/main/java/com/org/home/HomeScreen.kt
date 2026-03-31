@@ -21,9 +21,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.org.core.design_system.R as DesignSystemR
-import com.org.design_system.loading.titleGradient
 import com.org.design_system.spacer.VerticalSpacer
 import com.org.design_system.theme.RaypayTheme
+import com.org.design_system.theme.titleGradientBrush
 import com.org.navigation.RayPayNavigator
 
 @Composable
@@ -73,7 +73,7 @@ private fun HomeScreenContent(
                     style = TextStyle(
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 33.sp,
-                        brush = titleGradient
+                        brush = titleGradientBrush
                     )
                 )
             }

@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.sp
 import com.org.design_system.input_field.AuthInputFiled
 import com.org.design_system.spacer.VerticalSpacer
+import com.org.design_system.theme.PoppinsFontFamily
 import com.org.sign_in.ui.mvi.SignInEvent
 import com.org.sign_in.ui.mvi.SignInState
 import com.org.sign_in.ui.mvi.isErrorLogin
@@ -78,8 +79,9 @@ internal fun SignInInputFields(
         Text(
             text = "Forgot password?",
             style = TextStyle(
+                fontFamily = PoppinsFontFamily,
                 fontWeight = FontWeight.Normal,
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 lineHeight = 18.sp,
                 letterSpacing = 0.sp,
                 color = Color(0xFFBABABA)

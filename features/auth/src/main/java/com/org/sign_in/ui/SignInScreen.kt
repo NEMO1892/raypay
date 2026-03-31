@@ -95,7 +95,7 @@ private fun SignInScreenContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 38.dp, end = 38.dp, top = 60.dp, bottom = if (isKeyboardVisible) 0.dp else 100.dp)
+                .padding(start = 24.dp, end = 24.dp, top = 60.dp, bottom = if (isKeyboardVisible) 0.dp else 100.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,

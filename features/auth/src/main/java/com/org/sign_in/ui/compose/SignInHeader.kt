@@ -2,6 +2,7 @@ package com.org.sign_in.ui.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.org.design_system.spacer.HorizontalSpacer
 import com.org.design_system.spacer.VerticalSpacer
+import com.org.design_system.theme.PoppinsFontFamily
 import com.org.design_system.theme.RaypayTheme
 import com.org.core.design_system.R as DesignSystemR
 
@@ -53,12 +55,16 @@ internal fun SignInHeader(
 
         Text(
             text = "Welcome back",
+            textAlign = TextAlign.Center,
             style = TextStyle(
-                fontWeight = FontWeight.Bold,
-                fontSize = 36.sp,
-                lineHeight = 44.sp,
+                fontFamily = PoppinsFontFamily,
+                fontWeight = FontWeight.Normal,
+                fontSize = 40.sp,
+                lineHeight = 46.sp,
+                letterSpacing = 0.sp,
                 color = Color.White
-            )
+            ),
+            modifier = Modifier.fillMaxWidth()
         )
 
         VerticalSpacer(10.dp)
@@ -66,8 +72,9 @@ internal fun SignInHeader(
         Text(
             text = "Sign up to your account",
             style = TextStyle(
+                fontFamily = PoppinsFontFamily,
                 fontWeight = FontWeight.Normal,
-                fontSize = 16.sp,
+                fontSize = 18.sp,
                 lineHeight = 24.sp,
                 letterSpacing = 0.sp,
                 textAlign = TextAlign.Center,
